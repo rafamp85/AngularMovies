@@ -1,0 +1,48 @@
+<mat-grid-list cols="1" *ngIf="!movie; else divMovie">
+    <mat-grid-tile>
+        <mat-spinner></mat-spinner>
+    </mat-grid-tile>
+
+</mat-grid-list>
+
+<ng-template #divMovie>
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="30px">
+        <div fxFlex="50">
+            <h1>{{ movie.title}} <small>- {{movie.year}}</small></h1>
+            <mat-divider></mat-divider>
+            <br>
+            <img [src]="movie | image">
+        </div>
+        <div fxFlex="50">
+            <h1>{{movie.type}}</h1>
+            <mat-divider></mat-divider>
+            <mat-list>
+                <mat-list-item><strong>Directors: </strong>
+                    <span>{{movie.directors}}</span>
+                </mat-list-item>
+
+                <mat-list-item>
+                    <strong>Cast: </strong>
+                    <span>{{movie.cast.join(' - ')}}</span>
+                </mat-list-item>
+
+                <mat-list-item class="plot">{{movie.plot}}</mat-list-item>
+
+                <mat-list-item class="full-spot">{{movie.fullplot}}</mat-list-item>
+
+                <mat-list-item class="tomatoes">
+                    <strong>Rating: </strong>
+                    <span class="tomatoes-text">{{movie.tomatoes.viewer.rating}}</span>
+
+                    <strong>Reviews: </strong>
+                    <span class="tomatoes-text">{{movie.tomatoes.viewer.numReviews}}</span>
+
+                    <strong>Meter: </strong>
+                    <span class="tomatoes-text">{{movie.tomatoes.viewer.meter}}</span>
+                </mat-list-item>
+            </mat-list>
+
+            <button mat-button color="warn" (click)="onBackToMain()">Back</button>
+        </div>
+    </div>
+</ng-template>
